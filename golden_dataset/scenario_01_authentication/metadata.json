@@ -1,0 +1,118 @@
+{
+  "scenario_id": "01",
+  "scenario_name": "Authentication System",
+  "domain": "User Authentication and Security",
+  "complexity": "High",
+  "created_date": "2024-11-29",
+  "version": "1.0",
+  "description": "Comprehensive authentication system planning meeting covering email/password login, OAuth social login, two-factor authentication, user profile management, security hardening, and admin tools.",
+  "statistics": {
+    "transcript_length": 8642,
+    "transcript_duration_minutes": 29,
+    "speaker_count": 3,
+    "expected_requirements_count": 21,
+    "expected_stories_count": 12,
+    "expected_epics_count": 3
+  },
+  "requirements_breakdown": {
+    "functional": 10,
+    "non_functional": 7,
+    "technical": 4
+  },
+  "priority_distribution": {
+    "critical": 4,
+    "high": 11,
+    "medium": 6,
+    "low": 0
+  },
+  "story_points_total": 71,
+  "epics": [
+    {
+      "name": "Authentication System",
+      "story_count": 7,
+      "total_points": 42
+    },
+    {
+      "name": "User Profile Management",
+      "story_count": 3,
+      "total_points": 18
+    },
+    {
+      "name": "Admin Tools",
+      "story_count": 1,
+      "total_points": 8
+    }
+  ],
+  "key_challenges": [
+    "Complex security requirements across multiple authentication methods",
+    "Integration with existing architecture (ADR-002 compliance)",
+    "Balance between security and user experience",
+    "Multiple concurrent features with dependencies",
+    "Accessibility requirements across all UI components"
+  ],
+  "context_references": [
+    {
+      "type": "Architecture Decision Record",
+      "name": "ADR-002: Technology Stack Decisions",
+      "mentions": 2,
+      "relevance": "Specifies Python, FastAPI, PostgreSQL, Redis as required technologies"
+    },
+    {
+      "type": "Security Guidelines",
+      "name": "Security Best Practices Document",
+      "mentions": 1,
+      "relevance": "Guidelines for authentication, encryption, and data protection"
+    }
+  ],
+  "evaluation_notes": {
+    "difficulty_factors": [
+      "High density of requirements (21 in 29-minute meeting)",
+      "Multiple security-critical requirements",
+      "Technical terminology (OAuth, TOTP, JWT, bcrypt)",
+      "Cross-references to architectural documents",
+      "Three-sprint breakdown with explicit prioritization"
+    ],
+    "expected_agent_performance": {
+      "requirement_extraction": {
+        "precision_target": 0.90,
+        "recall_target": 0.85,
+        "notes": "Should capture all 21 requirements without hallucination"
+      },
+      "story_generation": {
+        "invest_score_target": 4.0,
+        "story_points_accuracy": 0.80,
+        "notes": "Stories should be well-structured with clear acceptance criteria"
+      },
+      "context_integration": {
+        "adr_reference_expected": true,
+        "security_guidelines_expected": true,
+        "notes": "Should incorporate ADR-002 tech stack in technical notes"
+      }
+    }
+  },
+  "test_assertions": {
+    "must_extract": [
+      "Email/password authentication",
+      "OAuth 2.0 (Google and GitHub)",
+      "Two-factor authentication (TOTP)",
+      "Rate limiting (5 attempts per 15 minutes)",
+      "Password reset with secure tokens",
+      "User profile management",
+      "Login history tracking",
+      "Admin panel for support",
+      "Bcrypt password hashing",
+      "JWT session management"
+    ],
+    "must_not_hallucinate": [
+      "Technologies not mentioned (e.g., MongoDB, Angular, etc.)",
+      "Requirements not discussed in transcript",
+      "Incorrect priority assignments"
+    ],
+    "context_integration_checks": [
+      "Stories should reference FastAPI (from ADR-002)",
+      "Stories should reference PostgreSQL (from ADR-002)",
+      "Stories should reference Redis (from ADR-002)",
+      "Security requirements should be marked as critical/high priority"
+    ]
+  }
+}

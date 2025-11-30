@@ -1,0 +1,14 @@
+Customer Meeting Transcript - November 2024
+===========================================
+
+Attendees: TechCorp PM, Product Team
+
+PM: "We really need dark mode in the app. Our night shift developers are complaining about eye strain."
+
+Engineer: "Can you prioritize dark mode? It's affecting productivity."
+
+PM: "Also, the export feature is timing out with 2,000+ issues. Takes 3-4 minutes and often fails. We need this for our monthly board reports."
+
+PM: "Finally, our team leads are spending hours doing bulk edits during sprint planning. We need to update 50+ issues at once - changing assignees, sprints, priorities."
+
+Engineer: "The bulk edit would save us so much time."

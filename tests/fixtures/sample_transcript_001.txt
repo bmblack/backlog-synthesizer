@@ -1,0 +1,124 @@
+Meeting Transcript: Q4 2024 Customer Feedback Session
+Date: November 15, 2024
+Attendees: Product Team, Customer Success, 3 Enterprise Customers
+Duration: 45 minutes
+
+---
+
+[00:02] Sarah Chen (Customer Success): Thanks everyone for joining today's feedback session. We have three of our enterprise customers here to discuss pain points and feature requests. Let's start with Alex from TechCorp.
+
+[00:45] Alex Martinez (TechCorp): Thanks Sarah. First off, we love the product, but there's one thing that's driving our team crazy - the lack of dark mode. Our engineers work late hours and the bright white interface is really harsh on the eyes. We've had multiple developers mention this. It's not a dealbreaker, but it would significantly improve their experience.
+
+[02:15] Sarah Chen: That's great feedback Alex. Dark mode has come up before. How critical would you rate this?
+
+[02:30] Alex Martinez: I'd say medium-high priority. It's affecting productivity for our night shift team. We estimate it's costing us about 15-30 minutes per developer per day in eye strain and context switching to darker apps.
+
+[03:00] Maya Patel (DesignHub): Can I jump in? We have a related issue. The current UI doesn't respect system-level theme preferences at all. Our designers use macOS dark mode and expect apps to follow that setting. It feels broken when your app is the only bright thing on their screen.
+
+[04:00] Sarah Chen: Good point Maya. So we're talking about both a manual dark mode toggle AND respecting OS-level preferences?
+
+[04:15] Maya Patel: Exactly. Ideally both. Let users choose, but default to system preference.
+
+[05:00] James Lee (DataCore): While we're on UI topics, I have to mention the export functionality. It's painfully slow. When we try to export our backlog - and we have about 2,000 issues - it takes 3-4 minutes and sometimes times out completely. This is a blocker for our monthly reporting process.
+
+[06:15] Sarah Chen: Ouch, that's definitely a problem. What format are you exporting to?
+
+[06:30] James Lee: CSV mostly, sometimes Excel. The timeout happens with both. We need this data for executive reports and right now we're manually copying data because export is unreliable. It's urgent - we have a board meeting next month and need reliable exports.
+
+[07:45] Alex Martinez: We have the same export issue! We only have 500 stories but it still takes 90 seconds. That's way too long.
+
+[08:30] Sarah Chen: Noted. Let me make sure I capture this - slow exports are blocking reporting workflows. What would be an acceptable time?
+
+[09:00] James Lee: For 2,000 issues? I'd expect under 10 seconds. Most tools do it instantly.
+
+[09:30] Maya Patel: I want to bring up search. The search functionality is really basic. We can't filter by multiple criteria at once. For example, I want to find all high-priority bugs assigned to the frontend team created in the last sprint. Right now I have to do three separate searches and manually cross-reference. It's tedious.
+
+[11:00] Sarah Chen: Can you give me a specific example of a search you do frequently?
+
+[11:20] Maya Patel: Sure. "Show me all stories tagged 'frontend' AND 'authentication' with status 'In Progress' created after October 1st." I need AND logic, not just individual filters.
+
+[12:30] Alex Martinez: Yes! Advanced search would be huge. We also need saved search filters. I do the same searches every day - having to rebuild them is wasteful.
+
+[13:15] James Lee: Saved searches would help. But can we also talk about bulk operations? When we need to update 50 stories at once - like changing sprint or adding a label - we have to click through each one individually. It takes forever.
+
+[14:30] Sarah Chen: So you need a bulk edit feature?
+
+[14:45] James Lee: Absolutely. Select multiple issues, then change assignee, sprint, priority, or add labels all at once. This would save hours every sprint planning session.
+
+[15:30] Maya Patel: Related to that - we need better keyboard shortcuts. Power users like our team leads want to navigate without touching the mouse. Something like JIRA's keyboard shortcuts would be perfect.
+
+[16:45] Alex Martinez: Keyboard shortcuts! Yes! Our most productive engineers barely use the mouse. They want j/k for navigation, c to create new story, e to edit, that kind of thing.
+
+[17:30] Sarah Chen: Great suggestions. Let me shift gears - are there any integration needs?
+
+[18:00] James Lee: Integration is critical for us. We use Slack heavily and would love real-time notifications when stories are updated. Right now we have to manually check the app or rely on email, which people ignore.
+
+[19:00] Alex Martinez: Slack integration would be huge for us too. Especially for @mentions - if someone mentions me in a comment, I want that in Slack immediately.
+
+[19:45] Maya Patel: We're more of a Teams shop, so Microsoft Teams integration would be our preference. But same concept - real-time notifications for updates, comments, and mentions.
+
+[20:30] Sarah Chen: So notification integrations for both Slack and Teams. What about other tools?
+
+[21:00] James Lee: GitHub integration would be amazing. We want story IDs to automatically link to pull requests. And when a PR is merged, update the story status automatically. The manual linking is error-prone.
+
+[22:15] Alex Martinez: GitHub integration is a must-have for us. Our developers constantly forget to update story status when they merge PRs. Automation would solve that.
+
+[23:00] Maya Patel: We use GitLab, not GitHub, so GitLab integration would be our need. But same concept - link merge requests to stories automatically.
+
+[24:00] Sarah Chen: Noted - Git integration with auto-status updates. What else?
+
+[24:30] James Lee: One more thing - mobile experience is really poor. The web app doesn't work well on mobile at all. Our executives want to review and approve stories on their phones during commute. Right now it's basically unusable on iOS.
+
+[25:45] Maya Patel: Mobile is painful. Even just viewing stories is clunky. Forget about editing or commenting on mobile.
+
+[26:30] Alex Martinez: A native mobile app would be ideal, but at minimum, the web app should be responsive and usable on phones.
+
+[27:15] Sarah Chen: Mobile access for executives and on-the-go updates. Got it. Any other pain points?
+
+[27:45] James Lee: Yes - permissions and access control. We need more granular permissions. Right now it's all-or-nothing. We want to give some stakeholders view-only access to specific epics without letting them see the entire backlog. Confidential projects, you know.
+
+[29:00] Maya Patel: Permissions are important for us too. We have external contractors who should only see stories assigned to them, nothing else. Current permissions don't support that.
+
+[30:00] Alex Martinez: We need role-based access. Like "Viewer", "Contributor", "Admin" with clear permissions for each role. And ability to customize roles.
+
+[31:00] Sarah Chen: More sophisticated permission system with role-based access and epic-level visibility control. Anything else critical?
+
+[31:45] James Lee: Performance in general feels sluggish when we have the full backlog loaded. With 2,000 stories, page load times are 5-6 seconds. Scrolling is janky. It should feel instant.
+
+[33:00] Alex Martinez: We've noticed that too. The app feels slow compared to competitors. Especially when switching between views or loading large epics.
+
+[34:00] Maya Patel: Performance is definitely an issue. Our team has fast internet and modern machines, but the app still feels heavy. Needs optimization.
+
+[35:00] Sarah Chen: Performance optimization across the board. Let me do a quick summary of what I've heard:
+
+1. Dark mode with system preference support - medium-high priority
+2. Fast, reliable export (CSV/Excel) - urgent, blocking monthly reports
+3. Advanced search with AND logic and saved filters - high priority
+4. Bulk edit operations - high priority for sprint planning
+5. Keyboard shortcuts for power users - medium priority
+6. Slack integration for real-time notifications - high priority
+7. Teams integration for notifications - high priority
+8. GitHub/GitLab integration with auto-status updates - must-have
+9. Mobile-responsive design or native app - medium-high priority
+10. Granular permissions and role-based access - important for security
+11. Performance optimization for large backlogs - affects daily usage
+
+Does that capture everything?
+
+[37:00] All Customers: Yes, that's a great summary.
+
+[37:15] Alex Martinez: If I had to pick top 3, I'd say: export performance, GitHub integration, and dark mode.
+
+[37:45] James Lee: For us: export is #1 urgent, then permissions, then Slack integration.
+
+[38:15] Maya Patel: Advanced search, bulk operations, and Teams integration are our top needs.
+
+[39:00] Sarah Chen: Perfect. This is extremely valuable feedback. We'll take this back to the product team and prioritize based on impact and effort. Expect to see some of these in the next quarter.
+
+[39:45] Alex Martinez: Looking forward to it! Thanks for listening.
+
+[40:00] Meeting ends.
+
+---
+
+END OF TRANSCRIPT

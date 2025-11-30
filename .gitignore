@@ -114,3 +114,13 @@ demo_data/*.docx
 
 # Keep example data
 !demo_data/README.md
+
+# Evaluation results
+results/
+evaluation_*.json
+evaluation_*.txt
+
+# Test output
+tests/output/*.json
+tests/output/*.txt
+!tests/output/.gitkeep

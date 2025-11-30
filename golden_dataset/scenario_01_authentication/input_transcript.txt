@@ -1,0 +1,225 @@
+Meeting Transcript: Authentication System Planning
+Date: 2024-03-15
+Attendees: Sarah Chen (Product Manager), Michael Torres (Tech Lead), Alex Kim (UX Designer)
+Duration: 45 minutes
+
+---
+
+Sarah Chen (PM) [00:00]: Alright team, let's kick off our Q2 planning for the authentication system. We've been getting a lot of feedback that our current basic login is just not cutting it anymore. Users want modern auth options.
+
+Michael Torres (Tech Lead) [00:45]: Yeah, I've been looking into this. I think we should go with OAuth 2.0 as the foundation. It's industry standard and gives us flexibility. We should definitely support Google and GitHub for social logins - those are the most requested.
+
+Sarah Chen [01:15]: Agreed on social login, but we still need email and password as the primary authentication method. Not everyone wants to connect their Google account to every service they use.
+
+Alex Kim (UX Designer) [01:40]: From a UX perspective, we need a really clean interface. I'm thinking a tabbed login page - one tab for email/password, another for social logins. We should also have clear visual indicators for which method the user is currently using.
+
+Michael Torres [02:10]: That makes sense. On the backend, I want to use FastAPI - it aligns with our existing microservices architecture. For password storage, we absolutely need bcrypt hashing. No plain text, no weak hashing like MD5.
+
+Sarah Chen [02:45]: Security is critical here. Can we implement rate limiting to prevent brute force attacks? I've read about services getting hammered by bot attacks trying to guess passwords.
+
+Michael Torres [03:15]: Definitely. I'm thinking we limit failed login attempts to 5 per IP address within a 15-minute window. After that, we temporarily block that IP. We should also implement account lockout after 5 consecutive failed attempts on the same account.
+
+Alex Kim [03:50]: What happens when a legitimate user gets locked out? We need a smooth recovery process.
+
+Sarah Chen [04:10]: Good point. Let's add email notifications whenever an account is locked. The email should include a link to unlock the account or reset the password.
+
+Michael Torres [04:35]: For session management, I want to use JWT tokens. They're stateless, which makes them perfect for our distributed architecture. We'll implement refresh token rotation for added security - that way, even if a token gets compromised, it won't be valid for long.
+
+Sarah Chen [05:15]: Speaking of security, I think we should add two-factor authentication. At least make it available as an optional feature for users who want extra protection.
+
+Michael Torres [05:40]: I was just about to suggest that! We can use TOTP - Time-based One-Time Passwords. It's the standard that apps like Google Authenticator and Authy use. Users would scan a QR code during setup, and then enter the 6-digit code from their authenticator app whenever they log in.
+
+Alex Kim [06:20]: That's going to need a setup wizard. Users need clear instructions on:
+1. Download an authenticator app
+2. Scan the QR code
+3. Enter the verification code
+4. Save backup codes in case they lose their device
+
+We should make this as simple as possible - maybe a step-by-step modal with illustrations.
+
+Sarah Chen [07:05]: Love it. What about a user profile page where they can manage all their authentication settings? Like enable/disable 2FA, manage connected social accounts, change their password, that sort of thing.
+
+Alex Kim [07:35]: Absolutely. The profile page should have several sections:
+- Security Settings: Enable/disable 2FA, change password, manage sessions
+- Connected Accounts: View and disconnect social logins
+- Login History: See recent login activity
+- Account Recovery: Backup codes for 2FA, trusted devices
+
+Michael Torres [08:15]: For the login history feature, we should log detailed information. Each login entry should include:
+- Timestamp
+- IP address
+- Device information (browser, OS)
+- Location (city/country based on IP)
+- Whether it was successful or failed
+- Authentication method used (password, Google, GitHub, 2FA)
+
+Sarah Chen [09:00]: That's great for security monitoring. Users can spot suspicious activity. Let's display the last 10 logins by default, with an option to view more. If someone sees a login from a location they've never been to, they can immediately take action.
+
+Michael Torres [09:40]: We'll need to implement several backend services for this:
+- Authentication service: Handles login, logout, token generation
+- User service: Manages user profiles and settings
+- Session service: Tracks active sessions, handles session storage in Redis
+- Notification service: Sends emails for verification, password reset, security alerts
+
+Sarah Chen [10:30]: Let's talk about the registration flow. What information do we need from users?
+
+Alex Kim [10:50]: Keep it minimal to reduce friction. Email and password should be enough for the basic flow. We can collect additional profile information later if needed.
+
+Michael Torres [11:15]: For new registrations, we need:
+- Email validation: Check format and verify it's not a disposable email
+- Password strength validation: Minimum 8 characters, at least one uppercase, one lowercase, one number, one special character
+- Email verification: Send a verification link that expires after 24 hours
+- Terms of service acceptance: Required checkbox before account creation
+
+Sarah Chen [12:00]: What about password reset? That's always a pain point.
+
+Michael Torres [12:20]: Standard secure token approach. User enters their email, we send a reset link with a unique token that expires after 1 hour. The token should be single-use - once they reset their password, the token becomes invalid even if it hasn't expired yet.
+
+Alex Kim [12:50]: The password reset page should have:
+- Clear instructions
+- Password strength indicator in real-time as they type
+- Requirements list that checks off as they meet each requirement
+- Confirmation field to ensure they didn't make a typo
+
+Sarah Chen [13:30]: One more thing - remember me functionality. Users should be able to stay logged in for longer periods on their trusted devices.
+
+Michael Torres [13:55]: We can do that with extended session tokens. Normal sessions expire after 24 hours, but if the user checks "Remember me," we extend it to 30 days. We should still require re-authentication for sensitive operations even with an active session.
+
+Sarah Chen [14:30]: Security considerations - what else do we need to think about?
+
+Michael Torres [14:50]: Several things:
+- HTTPS everywhere - no plain HTTP for authentication endpoints
+- CSRF protection for all state-changing operations
+- SQL injection prevention - use parameterized queries
+- XSS protection - sanitize all user inputs
+- Secure cookie flags: HttpOnly, Secure, SameSite
+- Content Security Policy headers
+- Rate limiting on all authentication endpoints, not just login
+
+Alex Kim [15:50]: From a UX angle, we need proper error messages that don't give away security information. Don't say "password incorrect" or "email not found" - just say "Invalid credentials."
+
+Sarah Chen [16:20]: Good point. We don't want to help attackers enumerate our user accounts.
+
+Michael Torres [16:45]: For admin capabilities, we should build an admin panel where support staff can:
+- View user account status
+- Manually unlock accounts that are locked
+- Reset passwords if users contact support
+- View audit logs of authentication events
+- Disable compromised accounts
+
+Sarah Chen [17:30]: This should follow our existing architecture decisions. Mike, can you make sure we're aligned with ADR-002 about our technology stack?
+
+Michael Torres [17:50]: Yes, absolutely. ADR-002 specifies Python and FastAPI for backend services, PostgreSQL for the main database, Redis for caching and session storage. Everything I've proposed fits within those decisions.
+
+Sarah Chen [18:25]: Perfect. Let's also make sure we're following security best practices from our security guidelines document. The one that specifies our approach to authentication, encryption, and data protection.
+
+Michael Torres [18:50]: I'll reference both ADR-002 and the security guidelines when I write the technical design doc.
+
+Alex Kim [19:20]: For the UI components, should I create a new design system component or extend our existing one?
+
+Sarah Chen [19:40]: Extend the existing design system. Let's maintain consistency across the platform.
+
+Alex Kim [20:00]: Got it. I'll create designs for:
+- Login page (with tabs for different auth methods)
+- Registration form
+- Profile management page
+- 2FA setup wizard
+- Password reset flow
+- Login history view
+
+Michael Torres [20:45]: On the API side, we'll need several endpoints:
+
+POST /auth/register - Create new account
+POST /auth/login - Authenticate user
+POST /auth/logout - End session
+POST /auth/refresh - Refresh access token
+POST /auth/forgot-password - Initiate password reset
+POST /auth/reset-password - Complete password reset
+POST /auth/verify-email - Verify email address
+
+GET /auth/session - Check current session status
+
+POST /auth/2fa/enable - Enable 2FA
+POST /auth/2fa/verify - Verify 2FA code
+POST /auth/2fa/disable - Disable 2FA
+GET /auth/2fa/qrcode - Get QR code for 2FA setup
+
+POST /oauth/authorize - Start OAuth flow
+POST /oauth/callback - Handle OAuth callback
+GET /oauth/connections - List connected accounts
+DELETE /oauth/connections/:provider - Disconnect social account
+
+GET /profile/settings - Get user settings
+PUT /profile/settings - Update user settings
+GET /profile/login-history - Get login history
+GET /profile/sessions - Get active sessions
+DELETE /profile/sessions/:id - Revoke specific session
+
+Sarah Chen [22:15]: That's comprehensive. What's your estimate for timeline?
+
+Michael Torres [22:40]: This is a substantial feature. I'm thinking we break it into three sprints:
+
+Sprint 1 (2 weeks):
+- Core authentication (email/password)
+- Registration and email verification
+- Password reset
+- Basic session management
+- Security hardening (rate limiting, bcrypt, etc.)
+
+Sprint 2 (2 weeks):
+- OAuth integration (Google and GitHub)
+- User profile page
+- Session management UI
+- Login history
+
+Sprint 3 (2 weeks):
+- Two-factor authentication
+- 2FA setup wizard
+- Remember me functionality
+- Admin panel for support
+- Final security audit and testing
+
+Sarah Chen [23:50]: That sounds reasonable. Let's prioritize the core authentication first since it's blocking other features. The social login and 2FA are nice-to-haves that we can push if we run into issues.
+
+Michael Torres [24:15]: Agreed. Core auth is the MVP. We can iterate on the advanced features.
+
+Alex Kim [24:40]: I'll have the core UI designs ready by end of this week. Mike, when do you need them?
+
+Michael Torres [25:00]: Next week would be great. That gives me time to set up the project structure and write some boilerplate this week.
+
+Sarah Chen [25:30]: Excellent. Let's make this happen. Mike, can you create the technical design document by end of week? Include architecture diagrams, database schemas, API specifications, and security considerations.
+
+Michael Torres [25:55]: Will do. I'll share it in our team Slack channel for review before our next planning meeting.
+
+Sarah Chen [26:15]: Perfect. Let's also create the JIRA epic and start breaking down stories. I'll handle that after we finish here.
+
+Alex Kim [26:35]: One last thing - accessibility. We need to ensure the authentication flows work well with screen readers and keyboard navigation.
+
+Michael Torres [26:55]: Good call. We should add ARIA labels to all form inputs and ensure proper focus management throughout the authentication flows.
+
+Sarah Chen [27:20]: Add that to the requirements. Accessibility is non-negotiable.
+
+Michael Torres [27:35]: Noted. I'll include accessibility requirements in the technical design doc and make sure we allocate time for proper testing.
+
+Sarah Chen [28:00]: Alright, I think we've covered everything. Let me summarize our key decisions:
+
+1. Implement email/password as primary auth method
+2. Add OAuth 2.0 support for Google and GitHub
+3. Include two-factor authentication (optional for users)
+4. Build comprehensive user profile management
+5. Display login history with detailed information
+6. Implement rate limiting and account lockout for security
+7. Use JWT for session management with Redis storage
+8. Create admin panel for support operations
+9. Follow ADR-002 tech stack decisions
+10. Three sprint timeline with core auth first
+
+Does that capture everything?
+
+Michael Torres [28:50]: Yes, that's complete.
+
+Alex Kim [29:00]: Looks good to me.
+
+Sarah Chen [29:10]: Great. Let's reconvene next week to review the technical design. Meeting adjourned.
+
+[END OF TRANSCRIPT]

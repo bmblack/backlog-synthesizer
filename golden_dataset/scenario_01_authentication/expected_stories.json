@@ -1,0 +1,245 @@
+[
+  {
+    "title": "Implement Email/Password Authentication",
+    "user_story": "As a user, I want to log in with my email address and password, so that I can securely access my account.",
+    "acceptance_criteria": [
+      "User can enter email and password on login page",
+      "System validates email format and password is not empty",
+      "Passwords are hashed with bcrypt before storage",
+      "Successful login creates JWT session token",
+      "Failed login shows generic 'Invalid credentials' error",
+      "Rate limiting applied: max 5 attempts per IP per 15 minutes",
+      "Account locked after 5 consecutive failed attempts",
+      "Email sent to user when account is locked"
+    ],
+    "story_points": 8,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["backend", "security", "authentication"],
+    "technical_notes": "Use FastAPI for API endpoints, bcrypt for hashing, PostgreSQL for user storage (per ADR-002)"
+  },
+  {
+    "title": "Implement OAuth 2.0 Social Login (Google and GitHub)",
+    "user_story": "As a user, I want to log in with my Google or GitHub account, so that I can access the platform without creating a new password.",
+    "acceptance_criteria": [
+      "User can select Google or GitHub login option",
+      "OAuth 2.0 flow implemented for both providers",
+      "First-time social login creates new user account",
+      "Existing users can link social accounts to their profile",
+      "User can unlink social accounts from profile page",
+      "Error handling for OAuth failures (denied permission, network issues)",
+      "User redirected to original page after successful login",
+      "Social login respects rate limiting rules"
+    ],
+    "story_points": 8,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["backend", "oauth", "integration"],
+    "technical_notes": "Implement OAuth callbacks, store provider tokens securely, handle token refresh"
+  },
+  {
+    "title": "Implement Two-Factor Authentication (TOTP)",
+    "user_story": "As a security-conscious user, I want to enable two-factor authentication on my account, so that my account is protected even if my password is compromised.",
+    "acceptance_criteria": [
+      "User can enable 2FA from profile security settings",
+      "QR code generated for TOTP setup",
+      "User scans QR code with authenticator app",
+      "User enters 6-digit verification code to confirm setup",
+      "Backup recovery codes generated and displayed (10 codes)",
+      "User must save backup codes before completing setup",
+      "2FA required on subsequent logins after enabled",
+      "User can disable 2FA from profile settings",
+      "Admin can disable 2FA for locked-out users"
+    ],
+    "story_points": 8,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["backend", "security", "2fa"],
+    "technical_notes": "Use TOTP standard (RFC 6238), generate QR codes with secret key, store backup codes securely"
+  },
+  {
+    "title": "Create 2FA Setup Wizard",
+    "user_story": "As a new 2FA user, I want a step-by-step wizard to set up two-factor authentication, so that I can easily enable this security feature without confusion.",
+    "acceptance_criteria": [
+      "Step 1: Explain what 2FA is and why it's beneficial",
+      "Step 2: Show instructions to download authenticator app",
+      "Step 3: Display QR code with option to copy secret manually",
+      "Step 4: User enters verification code to confirm setup",
+      "Step 5: Display backup codes with option to download/print",
+      "User can navigate back/forward through steps",
+      "Wizard has clear progress indicator",
+      "Each step has illustrations or icons for clarity",
+      "Wizard is mobile-responsive"
+    ],
+    "story_points": 5,
+    "epic_link": "User Profile Management",
+    "priority": "Medium",
+    "labels": ["frontend", "ui", "wizard"],
+    "technical_notes": "Use modal dialog, implement step navigation, integrate with 2FA backend API"
+  },
+  {
+    "title": "Build User Profile Management Page",
+    "user_story": "As a user, I want a centralized profile page where I can manage my security settings and connected accounts, so that I have full control over my authentication preferences.",
+    "acceptance_criteria": [
+      "Profile page has multiple sections: Security, Connected Accounts, Login History, Account Recovery",
+      "Security section shows 2FA status with enable/disable toggle",
+      "Security section has 'Change Password' button",
+      "Connected Accounts section lists linked social logins",
+      "User can disconnect social accounts",
+      "Login History section shows last 10 logins",
+      "Each login shows: timestamp, IP, device, location, auth method",
+      "Account Recovery section shows active backup codes (if 2FA enabled)",
+      "All sections are mobile-responsive"
+    ],
+    "story_points": 8,
+    "epic_link": "User Profile Management",
+    "priority": "Medium",
+    "labels": ["frontend", "ui", "profile"],
+    "technical_notes": "Extend existing design system, fetch data from multiple API endpoints"
+  },
+  {
+    "title": "Implement Login History Tracking",
+    "user_story": "As a user, I want to see my recent login history with detailed information, so that I can detect any unauthorized access to my account.",
+    "acceptance_criteria": [
+      "System logs each login attempt (successful and failed)",
+      "Login record includes: timestamp, IP address, device info, location, auth method",
+      "User can view last 10 logins on profile page",
+      "Option to view more login history (pagination)",
+      "Current session clearly indicated",
+      "Failed login attempts shown with red indicator",
+      "User can report suspicious activity with 'This wasn't me' button",
+      "Login history stored for 90 days",
+      "User can export login history as CSV"
+    ],
+    "story_points": 5,
+    "epic_link": "User Profile Management",
+    "priority": "Medium",
+    "labels": ["backend", "security", "monitoring"],
+    "technical_notes": "Create login_history table, log from authentication service, implement CSV export"
+  },
+  {
+    "title": "Implement Password Reset Flow",
+    "user_story": "As a user who forgot my password, I want to reset it securely via email, so that I can regain access to my account.",
+    "acceptance_criteria": [
+      "User can click 'Forgot Password' link on login page",
+      "User enters email address to receive reset link",
+      "System sends email with unique reset token",
+      "Reset token expires after 1 hour",
+      "Reset token is single-use only",
+      "Password reset page shows password strength indicator",
+      "Password requirements checklist shown in real-time",
+      "User must enter password twice for confirmation",
+      "Successful reset invalidates all existing sessions",
+      "User receives email confirmation after password change"
+    ],
+    "story_points": 5,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["backend", "frontend", "security"],
+    "technical_notes": "Generate secure tokens, implement token expiration, send templated emails"
+  },
+  {
+    "title": "Implement User Registration with Email Verification",
+    "user_story": "As a new user, I want to create an account with my email and password, so that I can start using the platform.",
+    "acceptance_criteria": [
+      "User can access registration page from login page",
+      "Registration form collects: email, password, password confirmation",
+      "Email format validated",
+      "Password strength validated (8+ chars, uppercase, lowercase, number, special char)",
+      "User must accept Terms of Service checkbox",
+      "System checks for disposable email domains",
+      "Verification email sent after registration",
+      "User cannot log in until email is verified",
+      "Verification link expires after 24 hours",
+      "User can resend verification email if needed"
+    ],
+    "story_points": 5,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["backend", "frontend", "onboarding"],
+    "technical_notes": "Implement email validation library, create verification token system, send templated emails"
+  },
+  {
+    "title": "Implement 'Remember Me' Extended Sessions",
+    "user_story": "As a frequent user, I want to stay logged in on my trusted devices for longer periods, so that I don't have to re-enter my credentials every day.",
+    "acceptance_criteria": [
+      "Login page has 'Remember Me' checkbox",
+      "Normal session expires after 24 hours",
+      "Remember Me session expires after 30 days",
+      "Extended sessions stored in Redis",
+      "User still required to re-authenticate for sensitive operations (change password, disable 2FA)",
+      "User can view active sessions on profile page",
+      "User can revoke individual sessions",
+      "All sessions revoked on password change",
+      "Extended sessions use secure, HttpOnly cookies"
+    ],
+    "story_points": 3,
+    "epic_link": "Authentication System",
+    "priority": "Medium",
+    "labels": ["backend", "session-management"],
+    "technical_notes": "Extend JWT expiration based on Remember Me flag, implement session revocation"
+  },
+  {
+    "title": "Build Admin Panel for User Account Management",
+    "user_story": "As a support staff member, I want an admin panel to manage user accounts and resolve authentication issues, so that I can help users who are locked out or experiencing problems.",
+    "acceptance_criteria": [
+      "Admin panel accessible only to users with admin role",
+      "Admin can search for users by email or user ID",
+      "Admin can view user account status (active, locked, suspended)",
+      "Admin can manually unlock locked accounts",
+      "Admin can reset user passwords (triggers password reset email)",
+      "Admin can disable 2FA for locked-out users",
+      "Admin can view user's login history",
+      "Admin can suspend/unsuspend user accounts",
+      "All admin actions logged in audit trail",
+      "Admin panel has proper access controls and permissions"
+    ],
+    "story_points": 8,
+    "epic_link": "Admin Tools",
+    "priority": "Medium",
+    "labels": ["backend", "frontend", "admin", "support"],
+    "technical_notes": "Implement role-based access control, create admin-specific API endpoints, log all admin actions"
+  },
+  {
+    "title": "Implement Security Hardening for Authentication APIs",
+    "user_story": "As a security engineer, I want all authentication endpoints to have comprehensive security measures, so that the system is protected against common attacks.",
+    "acceptance_criteria": [
+      "All authentication endpoints served over HTTPS only",
+      "CSRF protection implemented for all state-changing operations",
+      "SQL injection prevention via parameterized queries",
+      "XSS protection via input sanitization and output encoding",
+      "Secure cookie flags set: HttpOnly, Secure, SameSite",
+      "Content Security Policy headers configured",
+      "Rate limiting applied to all authentication endpoints",
+      "Detailed security logging for suspicious activity",
+      "Regular expression DoS prevention",
+      "Security headers (X-Frame-Options, X-Content-Type-Options) configured"
+    ],
+    "story_points": 5,
+    "epic_link": "Authentication System",
+    "priority": "Critical",
+    "labels": ["backend", "security", "infrastructure"],
+    "technical_notes": "Configure FastAPI security middleware, implement security headers, use security scanning tools"
+  },
+  {
+    "title": "Ensure Authentication UI Accessibility",
+    "user_story": "As a user with disabilities, I want the authentication flows to be fully accessible, so that I can use screen readers and keyboard navigation to log in.",
+    "acceptance_criteria": [
+      "All form inputs have proper ARIA labels",
+      "Keyboard navigation works throughout authentication flows",
+      "Focus management implemented (focus moves logically)",
+      "Error messages announced to screen readers",
+      "Color contrast meets WCAG AA standards",
+      "Form validation errors clearly associated with inputs",
+      "Loading states announced to screen readers",
+      "Skip links provided for screen reader users",
+      "Tested with NVDA and VoiceOver screen readers",
+      "Passes automated accessibility scans (axe, Lighthouse)"
+    ],
+    "story_points": 3,
+    "epic_link": "Authentication System",
+    "priority": "High",
+    "labels": ["frontend", "accessibility", "ui"],
+    "technical_notes": "Use semantic HTML, implement ARIA attributes, test with assistive technologies"
+  }
+]

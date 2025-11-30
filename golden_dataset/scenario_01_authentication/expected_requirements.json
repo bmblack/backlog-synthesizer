@@ -1,0 +1,149 @@
+[
+  {
+    "requirement": "Implement email and password authentication as the primary login method",
+    "type": "functional",
+    "priority_signal": "high",
+    "impact": "Core authentication functionality - blocks other features",
+    "source_location": "00:45-01:15"
+  },
+  {
+    "requirement": "Add OAuth 2.0 support for Google and GitHub social logins",
+    "type": "functional",
+    "priority_signal": "high",
+    "impact": "Modern authentication option requested by users",
+    "source_location": "00:45-01:15"
+  },
+  {
+    "requirement": "Implement two-factor authentication (TOTP) as an optional security feature",
+    "type": "functional",
+    "priority_signal": "high",
+    "impact": "Enhanced security for users who want extra protection",
+    "source_location": "05:15-06:20"
+  },
+  {
+    "requirement": "Create user profile management page with security settings and connected accounts",
+    "type": "functional",
+    "priority_signal": "medium",
+    "impact": "Central hub for users to manage authentication preferences",
+    "source_location": "07:05-07:35"
+  },
+  {
+    "requirement": "Display login history showing last 10 logins with timestamps, IP, device info, and location",
+    "type": "functional",
+    "priority_signal": "medium",
+    "impact": "Security monitoring - helps users detect unauthorized access",
+    "source_location": "08:15-09:00"
+  },
+  {
+    "requirement": "Implement password reset functionality with secure single-use tokens expiring after 1 hour",
+    "type": "functional",
+    "priority_signal": "high",
+    "impact": "Critical recovery mechanism for users who forget passwords",
+    "source_location": "12:00-12:50"
+  },
+  {
+    "requirement": "Add 'remember me' functionality with 30-day extended sessions for trusted devices",
+    "type": "functional",
+    "priority_signal": "medium",
+    "impact": "Improved user experience for frequent users",
+    "source_location": "13:30-13:55"
+  },
+  {
+    "requirement": "Build admin panel for support staff to manage user accounts and view audit logs",
+    "type": "functional",
+    "priority_signal": "medium",
+    "impact": "Support operations for handling account issues",
+    "source_location": "16:45-17:30"
+  },
+  {
+    "requirement": "Implement user registration with email validation and email verification",
+    "type": "functional",
+    "priority_signal": "high",
+    "impact": "Core onboarding flow for new users",
+    "source_location": "10:30-11:15"
+  },
+  {
+    "requirement": "Create 2FA setup wizard with QR code generation and backup codes",
+    "type": "functional",
+    "priority_signal": "medium",
+    "impact": "User-friendly onboarding for 2FA feature",
+    "source_location": "06:20-07:05"
+  },
+  {
+    "requirement": "Use bcrypt hashing for secure password storage",
+    "type": "non-functional",
+    "priority_signal": "critical",
+    "impact": "Essential security requirement - prevents password compromise",
+    "source_location": "02:10-02:45"
+  },
+  {
+    "requirement": "Implement rate limiting: 5 failed login attempts per IP per 15 minutes",
+    "type": "non-functional",
+    "priority_signal": "critical",
+    "impact": "Prevents brute force attacks and bot hammering",
+    "source_location": "02:45-03:50"
+  },
+  {
+    "requirement": "Implement account lockout after 5 consecutive failed login attempts with email notification",
+    "type": "non-functional",
+    "priority_signal": "critical",
+    "impact": "Account protection against targeted attacks",
+    "source_location": "03:15-04:10"
+  },
+  {
+    "requirement": "Use JWT tokens for session management with refresh token rotation",
+    "type": "technical",
+    "priority_signal": "high",
+    "impact": "Stateless authentication for distributed architecture",
+    "source_location": "04:35-05:15"
+  },
+  {
+    "requirement": "Store sessions in Redis for distributed session management",
+    "type": "technical",
+    "priority_signal": "high",
+    "impact": "Scalability and performance for session storage",
+    "source_location": "09:40-10:30, 17:50-18:25 (ADR-002)"
+  },
+  {
+    "requirement": "Use FastAPI framework for authentication services",
+    "type": "technical",
+    "priority_signal": "high",
+    "impact": "Aligns with existing microservices architecture (ADR-002)",
+    "source_location": "02:10, 17:50-18:25"
+  },
+  {
+    "requirement": "Implement comprehensive security measures: HTTPS, CSRF protection, XSS prevention, secure cookies",
+    "type": "non-functional",
+    "priority_signal": "critical",
+    "impact": "Complete security hardening against common attacks",
+    "source_location": "14:50-15:50"
+  },
+  {
+    "requirement": "Validate password strength: minimum 8 characters, uppercase, lowercase, number, special character",
+    "type": "non-functional",
+    "priority_signal": "high",
+    "impact": "Enforces strong passwords to prevent weak credentials",
+    "source_location": "11:15-12:00"
+  },
+  {
+    "requirement": "Design accessible authentication UI with ARIA labels and keyboard navigation",
+    "type": "non-functional",
+    "priority_signal": "high",
+    "impact": "Ensures authentication works for users with disabilities",
+    "source_location": "26:35-27:35"
+  },
+  {
+    "requirement": "Create RESTful API endpoints for all authentication operations",
+    "type": "technical",
+    "priority_signal": "high",
+    "impact": "API contract for frontend and external integrations",
+    "source_location": "20:45-22:15"
+  },
+  {
+    "requirement": "Implement proper error messages that don't reveal security information",
+    "type": "non-functional",
+    "priority_signal": "high",
+    "impact": "Prevents account enumeration attacks",
+    "source_location": "15:50-16:20"
+  }
+]
