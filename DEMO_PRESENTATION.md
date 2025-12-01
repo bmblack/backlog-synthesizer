@@ -67,10 +67,10 @@ Meeting Transcript → AI Analysis → JIRA Stories
 ┌────────────────────────────────────────────────────┐
 │           ORCHESTRATION (LangGraph)                │
 │                                                    │
-│  Ingest → Confluence → Extract → JIRA → Gaps →   │
-│          Context      Reqs      Fetch   Detection │
+│  Ingest → Confluence → Extract → JIRA → Gaps →     │
+│          Context      Reqs      Fetch   Detection  │
 │                                    ↓               │
-│          Generate Stories → Human Approval → Push │
+│          Generate Stories → Human Approval → Push  │
 └────────────────────────────────────────────────────┘
            ↓              ↓              ↓
     ┌──────────┐   ┌──────────┐   ┌──────────┐
@@ -80,9 +80,9 @@ Meeting Transcript → AI Analysis → JIRA Stories
            ↓
     ┌──────────────────────────────────────────────┐
     │  Memory Layer: ChromaDB + SQLite             │
-    │  • Vector embeddings for semantic search    │
-    │  • Checkpointing for resumability           │
-    │  • Audit logs for observability             │
+    │  • Vector embeddings for semantic search     │
+    │  • Checkpointing for resumability            │
+    │  • Audit logs for observability              │
     └──────────────────────────────────────────────┘
 ```
 
