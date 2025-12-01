@@ -84,22 +84,22 @@ graph TB
     G -.-> S
     K -.-> S
 
-    style D fill:#e1f5ff
-    style E fill:#e1f5ff
-    style F fill:#e1f5ff
-    style G fill:#e1f5ff
-    style H fill:#e1f5ff
-    style I fill:#e1f5ff
-    style J fill:#fff4e1
-    style K fill:#e1f5ff
+    style D fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style E fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style F fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style G fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style H fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style I fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style J fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
+    style K fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
 
-    style L fill:#f0e1ff
-    style M fill:#f0e1ff
-    style N fill:#f0e1ff
+    style L fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style M fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style N fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
 
-    style O fill:#e1ffe1
-    style P fill:#e1ffe1
-    style Q fill:#e1ffe1
+    style O fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style P fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style Q fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
 ```
 
 ## LangGraph Workflow State Machine
@@ -250,26 +250,26 @@ graph TB
 
     GRAPH -.->|MCP Query| CONF
 
-    style AA1 fill:#e1f5ff
-    style AA2 fill:#e1f5ff
-    style AA3 fill:#e1f5ff
-    style AA4 fill:#e1f5ff
+    style AA1 fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style AA2 fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style AA3 fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style AA4 fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
 
-    style SG1 fill:#f0e1ff
-    style SG2 fill:#f0e1ff
-    style SG3 fill:#f0e1ff
-    style SG4 fill:#f0e1ff
-    style SG5 fill:#f0e1ff
+    style SG1 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style SG2 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style SG3 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style SG4 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style SG5 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
 
-    style JI1 fill:#fff4e1
-    style JI2 fill:#fff4e1
-    style JI3 fill:#fff4e1
-    style JI4 fill:#fff4e1
+    style JI1 fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
+    style JI2 fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
+    style JI3 fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
+    style JI4 fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
 
-    style CLAUDE fill:#ff6b6b
-    style VM fill:#e1ffe1
-    style CP fill:#e1ffe1
-    style AL fill:#e1ffe1
+    style CLAUDE fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    style VM fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style CP fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style AL fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
 ```
 
 ## Data Flow Diagram
@@ -331,12 +331,12 @@ flowchart LR
     SG --> AP
     AP -->|Approved| JO
 
-    style T fill:#e1f5ff
-    style RE fill:#f0e1ff
-    style GD fill:#fff4e1
-    style SG fill:#e1ffe1
-    style AP fill:#ff6b6b
-    style JO fill:#e1f5ff
+    style T fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style RE fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style GD fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
+    style SG fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style AP fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    style JO fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
 ```
 
 ## Vector Memory Architecture
@@ -386,16 +386,16 @@ graph TB
     SS --> N
     SS --> CO
 
-    style C1 fill:#e1f5ff
-    style C2 fill:#f0e1ff
-    style C3 fill:#fff4e1
+    style C1 fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    style C2 fill:#9013FE,stroke:#6B0FC2,stroke-width:2px,color:#fff
+    style C3 fill:#F5A623,stroke:#C77E1A,stroke-width:2px,color:#fff
 
-    style E1 fill:#e1ffe1
-    style E2 fill:#e1ffe1
-    style E3 fill:#e1ffe1
+    style E1 fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style E2 fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
+    style E3 fill:#50E3C2,stroke:#3AB39B,stroke-width:2px,color:#000
 
-    style N fill:#ff6b6b
-    style CO fill:#51cf66
+    style N fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    style CO fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
 ```
 
 ## Audit & Provenance System
