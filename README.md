@@ -8,7 +8,7 @@
 
 Transform meeting transcripts into structured, conflict-free JIRA stories automatically using multi-agent AI, semantic search, and LLM-as-judge evaluation.
 
-🔗 **[GitHub Repository](https://github.com/bmblack/backlog-synthesizer)** | 📚 **[Documentation](./docs/)** | 🎯 **[Demo Presentation](./DEMO_PRESENTATION.md)**
+🔗 **[GitHub Repository](https://github.com/bmblack/backlog-synthesizer)** | 📚 **[Documentation](./docs/)**
 
 ---
 
@@ -360,17 +360,16 @@ This project is part of a capstone project in AI Engineering, demonstrating:
 - 8-node LangGraph workflow
 - 7-table audit database
 
-See [CAPSTONE_REQUIREMENTS_CHECKLIST.md](./CAPSTONE_REQUIREMENTS_CHECKLIST.md) for complete requirements tracking.
+📁 **[Capstone Documentation](./docs/capstone/)** - Academic materials (presentations, evaluation plans, requirements tracking)
 
 ---
 
 ## 📖 Documentation
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete system architecture (330 lines)
-- **[EVALUATION_PLAN.md](./EVALUATION_PLAN.md)** - Comprehensive evaluation methodology (400 lines)
-- **[EVALUATION_IMPLEMENTATION_SUMMARY.md](./EVALUATION_IMPLEMENTATION_SUMMARY.md)** - Evaluation system details (400 lines)
-- **[DEMO_PRESENTATION.md](./DEMO_PRESENTATION.md)** - 26-slide presentation with speaker notes
-- **[CAPSTONE_REQUIREMENTS_CHECKLIST.md](./CAPSTONE_REQUIREMENTS_CHECKLIST.md)** - Requirements tracking
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete system architecture
+- **[docs/diagrams.md](./docs/diagrams.md)** - Interactive Mermaid diagrams
+- **[docs/LANGGRAPH_ARCHITECTURE.md](./docs/LANGGRAPH_ARCHITECTURE.md)** - Workflow orchestration details
+- **[docs/COST_OPTIMIZATION.md](./docs/COST_OPTIMIZATION.md)** - Cost analysis and optimization strategies
 
 ---
 
