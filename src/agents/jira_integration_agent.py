@@ -545,10 +545,10 @@ class JIRAIntegrationAgent:
 
             logger.debug(f"JQL query: {jql}")
 
-            # Fetch issues from JIRA
-            issues = self.jira_client.search_issues(
-                jql_str=jql,
-                maxResults=max_results,
+            # Fetch issues from JIRA using atlassian-python-api
+            response = self.jira_client.jql(
+                jql=jql,
+                limit=max_results,
                 fields=[
                     "summary",
                     "description",
@@ -563,23 +563,26 @@ class JIRAIntegrationAgent:
             )
 
             # Normalize issues to standard format
+            # atlassian-python-api returns: {"issues": [...], "total": N, ...}
             normalized_issues = []
-            for issue in issues:
-                normalized_issue = {
-                    "key": issue.key,
-                    "summary": issue.fields.summary,
-                    "description": issue.fields.description or "",
-                    "issue_type": issue.fields.issuetype.name,
-                    "status": issue.fields.status.name,
-                    "priority": issue.fields.priority.name if issue.fields.priority else "Medium",
-                    "created": issue.fields.created,
-                    "updated": issue.fields.updated,
-                    "story_points": getattr(issue.fields, self.story_points_field, None),
-                    "epic_link": getattr(issue.fields, self.epic_link_field, None),
-                    "url": f"{self.jira_url}/browse/{issue.key}",
-                }
+            if response and "issues" in response:
+                for issue in response["issues"]:
+                    fields = issue.get("fields", {})
+                    normalized_issue = {
+                        "key": issue.get("key"),
+                        "summary": fields.get("summary", ""),
+                        "description": fields.get("description") or "",
+                        "issue_type": fields.get("issuetype", {}).get("name", ""),
+                        "status": fields.get("status", {}).get("name", ""),
+                        "priority": fields.get("priority", {}).get("name", "Medium"),
+                        "created": fields.get("created"),
+                        "updated": fields.get("updated"),
+                        "story_points": fields.get(self.story_points_field),
+                        "epic_link": fields.get(self.epic_link_field),
+                        "url": f"{self.jira_url}/browse/{issue.get('key')}",
+                    }
 
-                normalized_issues.append(normalized_issue)
+                    normalized_issues.append(normalized_issue)
 
             logger.info(f"[FETCH] Fetched {len(normalized_issues)} issues from JIRA")
 

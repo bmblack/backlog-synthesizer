@@ -31,7 +31,7 @@ class UserStory(BaseModel):
         description="3-5 testable conditions", min_length=3, max_length=10
     )
     story_points: int = Field(description="Fibonacci scale (1,2,3,5,8,13)", ge=1, le=13)
-    priority: str = Field(description="P1 (Critical) to P4 (Low)")
+    priority: str = Field(description="P0 (Blocker) to P4 (Low)")
     labels: List[str] = Field(description="Categorization tags")
     epic_link: Optional[str] = Field(default=None, description="Epic grouping")
     source_requirements: List[str] = Field(
@@ -45,7 +45,7 @@ class UserStory(BaseModel):
     @classmethod
     def validate_priority(cls, v: str) -> str:
         """Validate priority is in correct format."""
-        valid_priorities = ["P1", "P2", "P3", "P4"]
+        valid_priorities = ["P0", "P1", "P2", "P3", "P4"]
         if v not in valid_priorities:
             raise ValueError(f"Priority must be one of {valid_priorities}, got {v}")
         return v

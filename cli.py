@@ -194,6 +194,7 @@ Mike: Sounds good. I'll create the technical design doc this week.
                     "project": "SaaS Authentication System",
                     "team": "Platform Team",
                     "sprint": "Q1 2024",
+                    "jira_dry_run": args.dry_run,  # Pass dry-run flag to workflow
                 },
                 thread_id="demo-001",
             )
