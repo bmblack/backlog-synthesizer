@@ -255,6 +255,8 @@ pytest tests/test_vector_memory_simple.py -v
 
 ## 🏗️ Architecture
 
+> **📊 Interactive Diagrams**: See [docs/diagrams.md](./docs/diagrams.md) for Mermaid diagrams (renders on GitHub).
+
 ### System Overview
 
 ```

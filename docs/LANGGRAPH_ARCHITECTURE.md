@@ -1,5 +1,7 @@
 # LangGraph Architecture
 
+> **📊 Visual Diagrams**: See [diagrams.md](./diagrams.md) for interactive Mermaid diagrams of the LangGraph workflow.
+
 ## State Machine Diagram
 
 ```

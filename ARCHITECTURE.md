@@ -1,5 +1,7 @@
 # Backlog Synthesizer Architecture
 
+> **📊 Visual Diagrams**: See [docs/diagrams.md](./docs/diagrams.md) for interactive Mermaid diagrams of the architecture.
+
 ## System Overview
 
 ```
