@@ -41,42 +41,42 @@ Backlog Synthesizer is a sophisticated multi-agent system that:
 │              (LangGraph Workflow)                   │
 ├─────────────────────────────────────────────────────┤
 │                                                     │
-│  Input Sources:                                    │
-│  • Customer Transcripts (PDF/DOCX/TXT)             │
-│  • Confluence Architecture Docs (via MCP)          │
-│  • Existing JIRA Backlog (via MCP)                │
+│  Input Sources:                                     │
+│  • Customer Transcripts (PDF/DOCX/TXT)              │
+│  • Confluence Architecture Docs (via MCP)           │
+│  • Existing JIRA Backlog (via MCP)                  │
 │                                                     │
-│  ┌─────────────┐     ┌──────────────┐             │
-│  │  Ingestion  │────▶│   Analysis   │             │
-│  │   Agent     │     │    Agent     │             │
-│  └─────────────┘     └──────────────┘             │
+│  ┌─────────────┐     ┌──────────────┐               │
+│  │  Ingestion  │────▶│   Analysis   │               │
+│  │   Agent     │     │    Agent     │               │
+│  └─────────────┘     └──────────────┘               │
 │         │                    │                      │
 │         ▼                    ▼                      │
-│  ┌────────────────────────────────┐                │
-│  │   Vector Memory (ChromaDB)     │                │
-│  │   • Semantic Search            │                │
-│  │   • Episodic Memory            │                │
-│  │   • Procedural Rules           │                │
-│  └────────────────────────────────┘                │
+│  ┌────────────────────────────────┐                 │
+│  │   Vector Memory (ChromaDB)     │                 │
+│  │   • Semantic Search            │                 │
+│  │   • Episodic Memory            │                 │
+│  │   • Procedural Rules           │                 │
+│  └────────────────────────────────┘                 │
 │                    │                                │
 │                    ▼                                │
-│         ┌──────────────────┐                       │
-│         │   Generation     │                       │
-│         │     Agent        │                       │
-│         └──────────────────┘                       │
+│         ┌──────────────────┐                        │
+│         │   Generation     │                        │
+│         │     Agent        │                        │
+│         └──────────────────┘                        │
 │                    │                                │
 │                    ▼                                │
-│         ┌──────────────────┐                       │
-│         │  Human Review    │                       │
-│         │   (Checkpoint)   │                       │
-│         └──────────────────┘                       │
+│         ┌──────────────────┐                        │
+│         │  Human Review    │                        │
+│         │   (Checkpoint)   │                        │
+│         └──────────────────┘                        │
 │                    │                                │
 │                    ▼                                │
-│         ┌──────────────────┐                       │
-│         │  Push to JIRA    │                       │
-│         └──────────────────┘                       │
+│         ┌──────────────────┐                        │
+│         │  Push to JIRA    │                        │
+│         └──────────────────┘                        │
 │                                                     │
-│  Output: Structured JIRA Stories with Provenance   │
+│  Output: Structured JIRA Stories with Provenance    │
 └─────────────────────────────────────────────────────┘
 ```
 
