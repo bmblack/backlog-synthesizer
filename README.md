@@ -466,9 +466,9 @@ MIT License - See LICENSE file for details
 - ✅ **Full evaluation system with LLM-as-judge**
 - ✅ Audit logging and provenance
 - ✅ Demo materials and presentation
+- ✅ Visual architecture diagrams (Mermaid)
 
 **Optional Enhancements:**
-- Visual architecture diagrams (Mermaid/draw.io)
 - Additional golden dataset scenarios (02-05)
 - Web UI for human approval gate
 - Semantic embedding-based evaluation matching
