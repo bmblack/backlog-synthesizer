@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Backlog Synthesizer Demo Script.
+Backlog Synthesizer CLI.
 
-This demo shows how to use the backlog synthesizer workflow
-with a sample requirements gathering transcript.
+Command-line interface for the backlog synthesizer workflow.
+Processes meeting transcripts and generates JIRA user stories.
 
 Usage:
-    python demo.py [--dry-run]
+    python cli.py [--dry-run] [--input FILE]
 
-Features demonstrated:
+Features:
 - Document ingestion
 - Confluence context fetching (ADRs, specs)
 - Requirements extraction with LLM
@@ -23,6 +23,10 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -35,7 +39,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler("data/demo.log")
+        logging.FileHandler("data/cli.log")
     ]
 )
 
@@ -43,8 +47,8 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    """Run backlog synthesizer demo."""
-    parser = argparse.ArgumentParser(description="Backlog Synthesizer Demo")
+    """Run backlog synthesizer CLI."""
+    parser = argparse.ArgumentParser(description="Backlog Synthesizer CLI")
     parser.add_argument(
         "--dry-run",
         action="store_true",
@@ -70,7 +74,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 80)
-    print("BACKLOG SYNTHESIZER DEMO")
+    print("BACKLOG SYNTHESIZER")
     print("=" * 80)
     print()
 
@@ -177,15 +181,27 @@ Mike: Sounds good. I'll create the technical design doc this week.
         print("-" * 80)
         print()
 
-        result = workflow.run(
-            input_content=transcript,
-            context={
-                "project": "SaaS Authentication System",
-                "team": "Platform Team",
-                "sprint": "Q1 2024",
-            },
-            thread_id="demo-001",
-        )
+        # Write transcript to temporary file (workflow.run expects file path)
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
+            f.write(transcript)
+            temp_file = f.name
+
+        try:
+            result = workflow.run(
+                input_file_path=temp_file,
+                context={
+                    "project": "SaaS Authentication System",
+                    "team": "Platform Team",
+                    "sprint": "Q1 2024",
+                },
+                thread_id="demo-001",
+            )
+        finally:
+            # Clean up temporary file
+            import os
+            if os.path.exists(temp_file):
+                os.unlink(temp_file)
 
         print()
         print("-" * 80)
@@ -255,7 +271,7 @@ Mike: Sounds good. I'll create the technical design doc this week.
             print()
 
         print("=" * 80)
-        print("✓ DEMO COMPLETED SUCCESSFULLY")
+        print("✓ WORKFLOW COMPLETED SUCCESSFULLY")
         print("=" * 80)
         print()
 
@@ -269,13 +285,13 @@ Mike: Sounds good. I'll create the technical design doc this week.
         return 0
 
     except KeyboardInterrupt:
-        print("\n\n⚠ Demo interrupted by user")
+        print("\n\n⚠ Workflow interrupted by user")
         return 1
 
     except Exception as e:
-        logger.error(f"Demo failed: {e}", exc_info=True)
-        print(f"\n❌ Demo failed: {e}")
-        print("\nCheck data/demo.log for details")
+        logger.error(f"Workflow failed: {e}", exc_info=True)
+        print(f"\n❌ Workflow failed: {e}")
+        print("\nCheck data/cli.log for details")
         return 1
 
 

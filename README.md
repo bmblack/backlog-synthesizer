@@ -122,17 +122,17 @@ CONFLUENCE_API_TOKEN=your-confluence-token
 CONFLUENCE_SPACE_KEY=SPACE
 ```
 
-### 3. Run Demo
+### 3. Run CLI
 
 ```bash
 # Run with sample transcript (no JIRA push)
-python demo.py --dry-run
+python cli.py --dry-run
 
 # Run with custom input
-python demo.py --input path/to/transcript.txt
+python cli.py --input path/to/transcript.txt
 
 # Run and push to JIRA
-python demo.py
+python cli.py
 ```
 
 **Expected output:**
@@ -187,7 +187,7 @@ backlog-synthesizer/
 │   ├── COST_OPTIMIZATION.md
 │   └── LANGGRAPH_ARCHITECTURE.md
 ├── scripts/                            # Utility scripts
-├── demo.py                             # Production-ready CLI demo
+├── cli.py                              # Production-ready CLI
 ├── .env.example                        # Environment template
 └── README.md                           # This file
 ```
@@ -196,19 +196,19 @@ backlog-synthesizer/
 
 ## 🔧 Usage
 
-### Demo Script
+### Command Line Interface
 
-The `demo.py` script provides a complete demonstration of the system:
+The `cli.py` script provides the main entry point for the system:
 
 ```bash
 # Use sample transcript (included)
-python demo.py --dry-run
+python cli.py --dry-run
 
 # Use custom input
-python demo.py --input path/to/meeting.txt
+python cli.py --input path/to/meeting.txt
 
 # Enable all features
-python demo.py --input meeting.txt --no-checkpoint=false --no-vector-memory=false
+python cli.py --input meeting.txt --no-checkpoint=false --no-vector-memory=false
 ```
 
 ### Evaluation System
@@ -396,7 +396,7 @@ echo "ANTHROPIC_API_KEY=sk-ant-xxx" >> .env
 # Solution: Vector memory is created automatically on first run
 # If issues persist, delete data/chroma/ and restart
 rm -rf data/chroma/
-python demo.py --dry-run
+python cli.py --dry-run
 ```
 
 **Issue**: `Evaluation fails - no requirements extracted`

@@ -148,7 +148,7 @@ IP addresses, and device info...
 ### Live Execution (30 seconds)
 
 ```bash
-$ python demo.py --input examples/auth_meeting.txt
+$ python cli.py --input examples/auth_meeting.txt
 
 Initializing Backlog Synthesizer...
   - Checkpointing: SQLite ✓
@@ -709,10 +709,10 @@ cd backlog-synthesizer
 pip install -e ".[dev]"
 
 # Run demo with sample transcript
-python demo.py --dry-run
+python cli.py --dry-run
 
 # Or with your own transcript
-python demo.py --input your_meeting.txt
+python cli.py --input your_meeting.txt
 ```
 
 **Documentation:**
@@ -765,13 +765,13 @@ ls -lh data/
 # Should see: audit.db, chroma/, checkpoints/
 
 # 5. Run quick smoke test
-python demo.py --dry-run --input examples/sample_transcript.txt
+python cli.py --dry-run --input examples/sample_transcript.txt
 # Should complete in <30 seconds
 ```
 
 **During Demo:**
 1. Open terminal with large font (for visibility)
-2. Have `demo.py` ready to run
+2. Have `cli.py` ready to run
 3. Have example transcript open in editor
 4. Have JIRA board open in browser (optional)
 5. Have audit database viewer ready (optional)

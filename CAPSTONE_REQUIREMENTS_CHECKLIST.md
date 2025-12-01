@@ -615,7 +615,7 @@ def create_issue(self, issue_data):
 ---
 
 #### Demo Script ✅
-**File**: `demo.py` (284 lines)
+**File**: `cli.py` (284 lines)
 
 **Purpose**: Production-ready CLI for stakeholder demos
 
@@ -632,9 +632,9 @@ def create_issue(self, issue_data):
 
 **Usage**:
 ```bash
-python demo.py                    # Use sample transcript
-python demo.py --dry-run          # Demo without JIRA push
-python demo.py --input file.txt   # Custom input
+python cli.py                    # Use sample transcript
+python cli.py --dry-run          # Demo without JIRA push
+python cli.py --input file.txt   # Custom input
 ```
 
 ---
@@ -733,7 +733,7 @@ python demo.py --input file.txt   # Custom input
 - [x] Golden dataset (Scenario 01)
 
 **Demo Materials**:
-- [x] Demo script (`demo.py`)
+- [x] Demo script (`cli.py`)
 - [x] Sample transcript included
 - [x] Pre-demo checklist
 - [x] Backup plan (screenshots, video)

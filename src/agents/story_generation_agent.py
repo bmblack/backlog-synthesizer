@@ -351,25 +351,37 @@ class StoryGenerationAgent:
         # Check if response looks truncated (doesn't end with ] or })
         if not response_text.endswith("]") and not response_text.endswith("}"):
             logger.warning("Response appears truncated, attempting to fix...")
-            # Try to close the JSON array
-            if response_text.rstrip().endswith(","):
-                response_text = response_text.rstrip().rstrip(",")
 
-            # Count open brackets/braces and close them
-            open_brackets = response_text.count("[") - response_text.count("]")
-            open_braces = response_text.count("{") - response_text.count("}")
+            # Strategy: Remove incomplete trailing object and close the array
+            # Find the last complete object by looking for the last "},\n  {" pattern
+            # Then truncate after the last complete "}" and close the array with "]"
 
-            # Close any unclosed strings first
-            quote_count = response_text.count('"') - response_text.count('\\"')
-            if quote_count % 2 != 0:
-                response_text += '"'
-                open_braces -= 1  # The unclosed string was in an object
+            # Look for the last successfully closed object
+            last_complete_obj = response_text.rfind("  }")
+            if last_complete_obj > 0:
+                # Check if there's a trailing comma after this
+                after_obj = response_text[last_complete_obj + 3:].strip()
+                if after_obj.startswith(","):
+                    # Remove the trailing comma and everything after it
+                    response_text = response_text[:last_complete_obj + 3]
+                else:
+                    # Keep up to the closing brace
+                    response_text = response_text[:last_complete_obj + 3]
 
-            # Close objects and arrays
-            response_text += "}" * open_braces
-            response_text += "]" * open_brackets
+                # Close the array
+                response_text += "\n]"
+                logger.warning(f"Truncated incomplete trailing object, closed array properly")
+            else:
+                # Fallback: Try the old method of closing brackets
+                if response_text.rstrip().endswith(","):
+                    response_text = response_text.rstrip().rstrip(",")
 
-            logger.warning(f"Fixed response: added {open_braces} braces, {open_brackets} brackets")
+                open_brackets = response_text.count("[") - response_text.count("]")
+                open_braces = response_text.count("{") - response_text.count("}")
+
+                response_text += "}" * open_braces
+                response_text += "]" * open_brackets
+                logger.warning(f"Fixed response: added {open_braces} braces, {open_brackets} brackets")
 
         # Fix common JSON formatting issues from LLM responses
         # Normalize curly quotes to straight quotes (Claude sometimes uses typographic quotes)
